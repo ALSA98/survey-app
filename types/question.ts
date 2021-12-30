@@ -12,6 +12,7 @@ export interface QuestionOption {
 
 export interface Question {
   id: string
+  page: number | 'welcome' | 'end'
   title: string
   description?: string
   mode: QuestionMode

@@ -18,7 +18,7 @@ const CreateQuestionListItem: FC<props> = ({ name, mode, onClick }) => {
       size="large"
       fullWidth
       sx={{ border: '1px solid rgba(0,0,0,0.1)', height: '52px', mb: 2 }}
-      onClick={() => onClick()}
+      onClick={onClick}
     >
       {name}
     </Button>

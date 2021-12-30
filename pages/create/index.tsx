@@ -14,30 +14,42 @@ import generateUniqueId from '../../utils/id-generator'
 const tempQuestions: Question[] = [
   {
     id: 'welcome_page',
+    page: 'welcome',
     title: 'صفحه خوش‌آمدگویی',
     mode: QuestionMode.Info,
   },
   {
     id: generateUniqueId(8),
     title: 'سوال اول',
+    page: 1,
     mode: QuestionMode.Text,
   },
   {
     id: generateUniqueId(8),
     title: 'سوال دوم',
-    mode: QuestionMode.Text,
+    page: 2,
+    mode: QuestionMode.Checkbox,
   },
   {
     id: generateUniqueId(8),
     title: 'سوال سوم',
+    page: 3,
     mode: QuestionMode.Text,
   },
   {
     id: 'end_page',
     title: 'دانکا!',
+    page: 'end',
     mode: QuestionMode.Info,
   },
 ]
+
+const emptyData: Question = {
+  id: generateUniqueId(8),
+  title: '',
+  page: tempQuestions.length - 1,
+  mode: QuestionMode.Text,
+}
 
 const getModalData = (id: string) => {
   const index = tempQuestions.findIndex((item) => item.id === id)
@@ -47,7 +59,7 @@ const getModalData = (id: string) => {
 const Home: NextPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isNew, setIsNew] = useState<boolean>(false)
-  const [modalData, setModalData] = useState<Question | null>(null)
+  const [modalData, setModalData] = useState<Question>(emptyData)
 
   const handleItemClick = (id: string) => {
     setIsNew(false)
@@ -58,13 +70,12 @@ const Home: NextPage = () => {
   const handleNewClick = () => {
     setIsNew(true)
     setIsModalOpen(true)
-    setModalData(null)
+    setModalData(emptyData)
   }
 
   const handleModalClose = ({ save }: { save: boolean }) => {
     setIsModalOpen(false)
     if (save) alert('gonna save that')
-    setModalData(null)
   }
 
   return (
@@ -78,7 +89,6 @@ const Home: NextPage = () => {
       <Container maxWidth="sm" sx={{ py: 4 }}>
         <CreateQuestionModal
           isOpen={isModalOpen}
-          isNew={isNew}
           data={modalData}
           onClose={handleModalClose}
         />

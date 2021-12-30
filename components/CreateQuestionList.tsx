@@ -1,5 +1,4 @@
 // types
-import { style } from '@mui/system'
 import { FC } from 'react'
 import { Question, QuestionMode } from '../types/question'
 // components
